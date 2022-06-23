@@ -1,0 +1,7 @@
+---
+- src: do1jlr.unbound
+  version: v1.0.1
+- src: geerlingguy.node_exporter
+  version: 1.0.2
+- src: geerlingguy.ntp
+  version: 2.3.1

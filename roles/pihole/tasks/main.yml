@@ -1,0 +1,52 @@
+- name: Check if pihole service exists
+  stat:
+   path: /etc/init.d/pihole-FTL
+  register: service_status
+
+- name: Create /etc/pihole
+  become: yes
+  file:
+    path: /etc/pihole
+    state: directory
+    owner:  pi
+    group:  pi
+
+- name: Download install-pi-hole.sh
+  get_url:
+    url: https://install.pi-hole.net
+    dest: /home/pi/install-pi-hole.sh
+    mode: '0555'
+  when: service_status.stat.exists == false
+
+- name: Execute install-pi-hole.sh
+  shell: /home/pi/install-pi-hole.sh --unattended
+  when: service_status.stat.exists == false
+
+- name: Configuration pihole templates
+  template:
+    src: "./templates/{{ item }}"
+    dest:  "/etc/pihole/{{ item }}"
+    mode:  0644
+    owner:  pi
+    group:  pi
+  tags:
+    - config
+  with_items:
+    - setupVars.conf
+    - custom.list
+  notify: pihole-FTL Reload service
+
+- name: Enable and stared service pihole
+  service:
+    name: pihole-FTL
+    enabled: yes
+    state: started
+
+- name: Pihole check version
+  command: "pihole -v"
+  register: pihole_version
+  when: service_status.stat.exists == true
+
+- debug:
+    var: pihole_version.stdout_lines
+

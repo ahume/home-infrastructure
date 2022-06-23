@@ -1,0 +1,28 @@
+- name: updating hostname {{ inventory_hostname }} (2/2)
+  become: true
+  copy:
+    content: "{{ inventory_hostname }}{{'\n'}}"
+    dest: /etc/hostname
+    backup: true
+  register: hostname_change
+  notify:
+    - Reboot
+    - Wait
+
+- name: update /etc/hosts
+  become: true
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: "127.0.0.1{{'\t'}}{{ inventory_hostname }}"
+    backup: true
+    state: present
+  notify:
+    - Reboot
+    - Wait
+
+- name: 'Update APT package cache'
+  become: true
+  apt:
+    update_cache: yes
+    upgrade: safe

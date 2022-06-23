@@ -1,0 +1,4 @@
+- name: pihole-FTL Reload service
+  service:
+    name: pihole-FTL
+    state: reloaded

@@ -1,0 +1,6 @@
+- name: Reboot
+  shell: nohup bash -c "/usr/bin/sleep 5 && /usr/sbin/shutdown -r now" &
+  become: true
+
+- name: Wait
+  wait_for_connection: timeout=300 delay=30

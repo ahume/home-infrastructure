@@ -1,0 +1,14 @@
+{{ ansible_managed }}
+
+# All ansible known hosts
+{% for host in groups['all'] %}
+{{ hostvars[host]['ansible_host'] }} {{ host }}
+{% endfor %}
+
+34.71.68.101 go
+192.168.10.10 grafana.hunet.uk
+192.168.10.10 prometheus.hunet.uk
+192.168.10.10 status.hunet.uk
+
+
+35.33.33.3 ok.then
