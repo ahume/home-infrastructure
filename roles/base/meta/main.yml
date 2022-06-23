@@ -1,7 +1,7 @@
 ---
 dependencies:
-- role: geerlingguy.ntp
-  ntp_timezone: Europe/London
-  become: true
-- role: geerlingguy.node_exporter
-  become: true
+  - role: geerlingguy.ntp
+    ntp_timezone: Europe/London
+    become: true
+  - role: geerlingguy.node_exporter
+    become: true

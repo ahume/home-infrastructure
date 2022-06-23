@@ -1,34 +1,35 @@
 - name: Check if pihole service exists
-  stat:
-   path: /etc/init.d/pihole-FTL
-  register: service_status
+  ansible.builtin.stat:
+    path: /etc/init.d/pihole-FTL
+    register: service_status
 
 - name: Create /etc/pihole
-  become: yes
-  file:
+  become: true
+  ansible.builtin.file:
     path: /etc/pihole
     state: directory
-    owner:  pi
-    group:  pi
+    mode: 0644
+    owner: pi
+    group: pi
 
 - name: Download install-pi-hole.sh
-  get_url:
+  ansible.builtin.get_url:
     url: https://install.pi-hole.net
     dest: /home/pi/install-pi-hole.sh
     mode: '0555'
-  when: service_status.stat.exists == false
+  when: not service_status.stat.exists
 
 - name: Execute install-pi-hole.sh
-  shell: /home/pi/install-pi-hole.sh --unattended
-  when: service_status.stat.exists == false
+  ansible.builtin.command: /home/pi/install-pi-hole.sh --unattended
+  when: not service_status.stat.exists
 
 - name: Configuration pihole templates
-  template:
+  ansible.builtin.template:
     src: "./templates/{{ item }}"
-    dest:  "/etc/pihole/{{ item }}"
-    mode:  0644
-    owner:  pi
-    group:  pi
+    dest: "/etc/pihole/{{ item }}"
+    mode: 0644
+    owner: pi
+    group: pi
   tags:
     - config
   with_items:
@@ -37,16 +38,16 @@
   notify: pihole-FTL Reload service
 
 - name: Enable and stared service pihole
-  service:
+  ansible.builtin.service:
     name: pihole-FTL
-    enabled: yes
+    enabled: true
     state: started
 
 - name: Pihole check version
-  command: "pihole -v"
+  ansible.builtin.command: "pihole -v"
   register: pihole_version
-  when: service_status.stat.exists == true
+  when: service_status.stat.exists
 
-- debug:
+- name: Print pihole version
+  ansible.builtin.debug:
     var: pihole_version.stdout_lines
-

@@ -6,5 +6,4 @@
     - role: pihole
     - role: do1jlr.unbound
       unbound_listen_addresses:
-      - 127.0.0.1@5335
-
+        - 127.0.0.1@5335

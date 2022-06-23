@@ -1,4 +1,4 @@
 - name: pihole-FTL Reload service
-  service:
+  ansible.builtin.service:
     name: pihole-FTL
     state: reloaded
