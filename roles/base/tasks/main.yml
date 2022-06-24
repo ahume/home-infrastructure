@@ -15,7 +15,7 @@
   ansible.builtin.lineinfile:
     dest: /etc/hosts
     regexp: '^127\.0\.0\.1'
-    line: "127.0.0.1{{'\t'}}{{ inventory_hostname }}"
+    line: "127.0.0.1{{'\t'}}{{ inventory_hostname }}" # noqa: no-tabs
     backup: true
     state: present
   notify:

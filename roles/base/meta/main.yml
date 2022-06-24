@@ -1,7 +1,19 @@
 ---
+galaxy_info:
+  author: ahume
+  description: base role used to bootstrap a raspberry pi
+  license: none
+  min_ansible_version: v2.12
+  platforms:
+    - name: Debian
+      versions:
+        - all
+
+
 dependencies:
   - role: geerlingguy.ntp
-    ntp_timezone: Europe/London
+    vars:
+      ntp_timezone: Europe/London
     become: true
   - role: geerlingguy.node_exporter
     become: true
