@@ -7,19 +7,19 @@
 
 - name: Ensure snapd is enabled.
   become: true
-  systemd:
+  ansible.builtin.systemd:
     name: snapd.socket
     enabled: true
     state: started
 
 - name: Update snap after install.
-  shell: snap install core; snap refresh core
+  ansible.builtin.shell: snap install core; snap refresh core
   changed_when: true
   failed_when: false
   when: snapd_install is changed
 
 - name: Install certbot via snap.
-  snap:
+  community.general.snap:
     name: certbot
     classic: true
 
