@@ -1,5 +1,5 @@
 - name: Check if pihole service exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/init.d/pihole-FTL
   register: service_status
 

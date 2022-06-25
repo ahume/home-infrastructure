@@ -12,7 +12,7 @@
     enabled: true
     state: started
 
-- name: Update snap after install.
+- name: Update snap after install. # noqa: no-handler
   ansible.builtin.shell: snap install core; snap refresh core
   changed_when: true
   failed_when: false
