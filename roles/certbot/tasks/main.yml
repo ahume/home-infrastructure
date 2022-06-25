@@ -1,0 +1,45 @@
+- name: Ensure snapd is installed.
+  become: true
+  ansible.builtin.package:
+    name: snapd
+    state: present
+  register: snapd_install
+
+- name: Ensure snapd is enabled.
+  become: true
+  systemd:
+    name: snapd.socket
+    enabled: true
+    state: started
+
+- name: Update snap after install.
+  shell: snap install core; snap refresh core
+  changed_when: true
+  failed_when: false
+  when: snapd_install is changed
+
+- name: Install certbot via snap.
+  snap:
+    name: certbot
+    classic: true
+
+- name: Install certbot-cloudflare-dns plugin
+  become: true
+  community.general.snap:
+    name:
+      - certbot-dns-cloudflare
+
+- name: Symlink certbot into place.
+  become: true
+  ansible.builtin.file:
+    src: /snap/bin/certbot
+    dest: /usr/bin/certbot
+    state: link
+
+- include_tasks: create-cert.yml
+  with_items: "{{ certbot_certs }}"
+  loop_control:
+    loop_var: cert_item
+
+- import_tasks: renew-cron.yml
+  when: certbot_auto_renew
