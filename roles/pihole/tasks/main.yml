@@ -1,14 +1,14 @@
 - name: Check if pihole service exists
-  ansible.builtin.stat:
+  stat:
     path: /etc/init.d/pihole-FTL
-    register: service_status
+  register: service_status
 
 - name: Create /etc/pihole
   become: true
   ansible.builtin.file:
     path: /etc/pihole
     state: directory
-    mode: 0644
+    mode: 0655
     owner: pi
     group: pi
 
@@ -24,10 +24,11 @@
   when: not service_status.stat.exists
 
 - name: Configuration pihole templates
+  become: true
   ansible.builtin.template:
     src: "./templates/{{ item }}"
     dest: "/etc/pihole/{{ item }}"
-    mode: 0644
+    mode: 0655
     owner: pi
     group: pi
   tags:
