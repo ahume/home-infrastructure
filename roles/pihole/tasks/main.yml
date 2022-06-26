@@ -16,11 +16,7 @@
   ansible.builtin.get_url:
     url: https://install.pi-hole.net
     dest: /home/pi/install-pi-hole.sh
-    mode: '0555'
-  when: not service_status.stat.exists
-
-- name: Execute install-pi-hole.sh
-  ansible.builtin.command: /home/pi/install-pi-hole.sh --unattended
+    mode: 0755
   when: not service_status.stat.exists
 
 - name: Configuration pihole templates
@@ -37,6 +33,11 @@
     - setupVars.conf
     - custom.list
   notify: pihole-FTL Reload service
+
+- name: Execute install-pi-hole.sh
+  become: true
+  ansible.builtin.command: /home/pi/install-pi-hole.sh --unattended
+  when: not service_status.stat.exists
 
 - name: Enable and stared service pihole
   ansible.builtin.service:

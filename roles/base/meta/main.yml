@@ -16,4 +16,6 @@ dependencies:
       ntp_timezone: Europe/London
     become: true
   - role: geerlingguy.node_exporter
+    vars:
+      node_exporter_arch: 'armv7'
     become: true
