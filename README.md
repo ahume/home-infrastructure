@@ -2,7 +2,7 @@
 
 My home Rasperry Pi cluster runs various networking and home automation applications. They are primarily managed by Ansible using the playbooks in this repository.
 
-## Prereqs
+## Local Prerequisites
 
 - Install anisble
 - Install galaxy deps `ansible-galaxy install -r roles/requirements.yml`
@@ -19,7 +19,7 @@ All Pis run Rasperry Pi OS Lite. Prior to Ansible taking over there are several 
     - Enable SSH
     - Paste the output of `cat ~/.ssh/id_ed25519.pub` into the set authorized_keys field
     - Disable Set username and password
-4. Write to SD card and eject from PC.
+4. Write to SD card and eject from computer.
 
 ### Provision Pi into the network
 
@@ -36,8 +36,6 @@ sudo vim /etc/ansible/hosts
 ```
 
 Add the new host under the appropriate group. E.g. if the new machine role is a Pi-Hole / DNS server add under the existing `[pihole]` group
-
-## Insta
 
 ## Useful ansible commands
 

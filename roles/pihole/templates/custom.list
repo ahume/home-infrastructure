@@ -1,4 +1,4 @@
-{{ ansible_managed }}
+# {{ ansible_managed }}
 
 # All ansible known hosts
 {% for host in groups['all'] %}
@@ -9,6 +9,3 @@
 192.168.10.10 grafana.hunet.uk
 192.168.10.10 prometheus.hunet.uk
 192.168.10.10 status.hunet.uk
-
-
-35.33.33.3 ok.then

@@ -1,4 +1,6 @@
 - name: pihole-FTL Reload service
+  become: true
   ansible.builtin.service:
     name: pihole-FTL
     state: reloaded
+  when: service_status.stat.exists

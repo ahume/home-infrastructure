@@ -8,9 +8,7 @@
   ansible.builtin.file:
     path: /etc/pihole
     state: directory
-    mode: 0655
-    owner: pi
-    group: pi
+    mode: 0755
 
 - name: Download install-pi-hole.sh
   ansible.builtin.get_url:
@@ -19,14 +17,12 @@
     mode: 0755
   when: not service_status.stat.exists
 
-- name: Configuration pihole templates
+- name: Copy configuration templates
   become: true
   ansible.builtin.template:
     src: "./templates/{{ item }}"
     dest: "/etc/pihole/{{ item }}"
-    mode: 0655
-    owner: pi
-    group: pi
+    mode: 0755
   tags:
     - config
   with_items:
@@ -34,22 +30,42 @@
     - custom.list
   notify: pihole-FTL Reload service
 
+# - name: Copy files
+#   become: true
+#   ansible.builtin.template:
+#     src: "./files/{{ item }}"
+#     dest: "/etc/pihole/file-{{ item }}"
+#     mode: 0655
+#     owner: pi
+#     group: pi
+#   with_items:
+#     - whitelist.txt
+
 - name: Execute install-pi-hole.sh
   become: true
   ansible.builtin.command: /home/pi/install-pi-hole.sh --unattended
   when: not service_status.stat.exists
 
 - name: Enable and stared service pihole
+  become: true
   ansible.builtin.service:
     name: pihole-FTL
     enabled: true
     state: started
 
-- name: Pihole check version
-  ansible.builtin.command: "pihole -v"
-  register: pihole_version
-  when: service_status.stat.exists
+# - name: Enable query logging
+#   ansible.builtin.command: "pihole logging on"
+#   when: service_status.stat.exists
 
-- name: Print pihole version
-  ansible.builtin.debug:
-    var: pihole_version.stdout_lines
+# - name: Add whitelist
+#   ansible.builtin.shell: "cat /etc/pihole/file-whitelist.txt | xargs pihole whitelist"
+#   notify: pihole-FTL Reload service
+
+# - name: Pihole check version
+#   ansible.builtin.command: "pihole -v"
+#   register: pihole_version
+#   when: service_status.stat.exists
+
+# - name: Print pihole version
+#   ansible.builtin.debug:
+#     var: pihole_version.stdout_lines

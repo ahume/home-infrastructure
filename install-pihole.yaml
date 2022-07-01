@@ -3,7 +3,35 @@
   hosts: pihole
   roles:
     - role: base
-    - role: pihole
-    - role: do1jlr.unbound
-      unbound_listen_addresses:
-        - 127.0.0.1@5335
+
+  tasks:
+    - name: filebeat
+      ansible.builtin.include_role:
+        name: logz-filebeat
+      vars:
+        ansible_become: true
+        boom: gg
+        filebeat_template: "{{ playbook_dir }}/templates/filebeat.yml.j2"
+        filebeat_logz_token: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36643433613065333136623266333966663832343265323839343665623061636533393464653737
+          3166626365316431373166373134396533333962636637620a616634373533636365336138646335
+          34653933623364666433333565383535623862373962316239646339343534393362376665633935
+          3664643739343331310a353332326637613931393366353061333432353466643334613163366666
+          30643230346563643561616664383238323434666562663361366433313839393434646530353265
+          3236356464346664653538613939616534613264383331363637
+        filebeat_logz_logstash_host: listener-uk.logz.io:5015
+        filebeat_extra_linelogs:
+          - /var/log/pihole.log
+
+    - name: pihole
+      ansible.builtin.include_role:
+        name: pihole
+
+    - name: unbound
+      ansible.builtin.include_role:
+        name: do1jlr.unbound
+      vars:
+        unbound_listen_addresses:
+          - 127.0.0.1@5335
+
