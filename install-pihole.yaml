@@ -10,7 +10,6 @@
         name: logz-filebeat
       vars:
         ansible_become: true
-        boom: gg
         filebeat_template: "{{ playbook_dir }}/templates/filebeat.yml.j2"
         filebeat_logz_token: !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -34,4 +33,3 @@
       vars:
         unbound_listen_addresses:
           - 127.0.0.1@5335
-
