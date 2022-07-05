@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: speedtest-exporter
+  name: speedtest-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speedtest-exporter
+  template:
+    metadata:
+      labels:
+        app: speedtest-exporter
+    spec:
+      containers:
+      - image: miguelndecarvalho/speedtest-exporter
+        imagePullPolicy: IfNotPresent
+        name: speedtest-exporter
+      affinity:
+        # Must run on node with at least Gigabit ethernet connectivity,
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: hunet.uk/ethernet-speed
+                operator: In
+                values:
+                - gbe
