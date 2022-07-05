@@ -1,2 +1,3 @@
 cloudflare-creds.ini
 .vault-password
+secret-values.yaml
