@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: test-probe
+  namespace: monitoring
+spec:
+  jobName: http-get
+  interval: 60s
+  module: http_2xx
+  prober:
+    url: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc:9115
+    scheme: http
+    path: /probe
+  targets:
+    staticConfig:
+      static:
+        - http://www.google.com
+        - https://github.com
+        - https://www.apple.com
