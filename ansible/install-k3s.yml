@@ -1,0 +1,72 @@
+---
+
+- hosts: k3s_cluster
+  gather_facts: true
+  become: true
+  roles:
+    - role: base
+  tasks:
+    - include_role:
+        name: k3s/download
+      vars:
+        k3s_version: v1.24.2+k3s1
+
+- hosts: k3s_master
+  become: true
+  roles:
+    - role: k3s/master
+      vars:
+        master_ip: "{{ hostvars[groups['k3s_master'][0]]['ansible_host'] | default(groups['k3s_master'][0]) }}"
+        extra_server_args: "--node-label hunet.uk/ethernet-speed={{ ethernet_speed }} --disable servicelb --kube-apiserver-arg default-not-ready-toleration-seconds-int"
+  tasks:
+    - name: download helm installer
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+        dest: /home/pi/get_helm.sh
+        mode: 0755
+
+    - name: Execute get_helm.sh
+      become: true
+      ansible.builtin.command: /home/pi/get_helm.sh
+
+    - name: install pip and python-yaml
+      include_role:
+        name: buluma.python_pip
+      vars:
+        python_pip_modules:
+          - name: pyyaml
+
+    - name: Add argo-helm chart repo
+      kubernetes.core.helm_repository:
+        name: argo-helm
+        repo_url: https://argoproj.github.io/argo-helm
+
+    # Once this is complete, run...
+    # kubectl delete secret -l owner=helm,name=argo-cd
+    # as it will be argo-cd managed.
+    - name: install argo-cd
+      kubernetes.core.helm:
+        kubeconfig: "/home/pi/.kube/config"
+        name: argo-cd
+        chart_ref: argo-helm/argo-cd
+        release_namespace: argo-cd
+        create_namespace: true
+        values:
+          dex:
+            enabled: false
+          server:
+            extraArgs:
+              - --insecure
+            config:
+              repositories: |
+                - type: helm
+                  name: argo-cd
+                  url: https://argoproj.github.io/argo-helm
+
+- hosts: k3s_node
+  become: true
+  roles:
+    - role: k3s/node
+      vars:
+        master_ip: "{{ hostvars[groups['k3s_master'][0]]['ansible_host'] | default(groups['k3s_master'][0]) }}"
+        extra_agent_args: "--node-label hunet.uk/ethernet-speed={{ ethernet_speed }} --kubelet-arg node-status-update-frequency=5s"
