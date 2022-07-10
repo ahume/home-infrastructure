@@ -11,8 +11,8 @@ spec:
     namespace: default
   project: default
   source:
-    path: charts/argo-cd
-    repoURL:  https://argoproj.github.io/argo-helm
+    path: kubernetes/argocd
+    repoURL: https://github.com/ahume/home-infrastructure.git
     targetRevision: HEAD
   syncPolicy:
     automated:
