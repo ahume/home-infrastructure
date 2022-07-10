@@ -6,6 +6,9 @@
 {% endfor %}
 
 34.71.68.101 go
-192.168.10.10 grafana.hunet.uk
-192.168.10.10 prometheus.hunet.uk
-192.168.10.10 status.hunet.uk
+
+# metallb VIP for kubernetes services.
+# Need a way to automate this external-dns style.
+192.168.10.40 grafana.hunet.uk
+192.168.10.40 prometheus.hunet.uk
+192.168.10.40 status.hunet.uk

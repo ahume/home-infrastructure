@@ -30,17 +30,6 @@
     - custom.list
   notify: pihole-FTL Reload service
 
-# - name: Copy files
-#   become: true
-#   ansible.builtin.template:
-#     src: "./files/{{ item }}"
-#     dest: "/etc/pihole/file-{{ item }}"
-#     mode: 0655
-#     owner: pi
-#     group: pi
-#   with_items:
-#     - whitelist.txt
-
 - name: Execute install-pi-hole.sh
   become: true
   ansible.builtin.command: /home/pi/install-pi-hole.sh --unattended
@@ -56,6 +45,19 @@
 # - name: Enable query logging
 #   ansible.builtin.command: "pihole logging on"
 #   when: service_status.stat.exists
+
+## Not sure how to make allowlist IaC yet.
+## This task copies them over but need to
+# - name: Copy files
+#   become: true
+#   ansible.builtin.template:
+#     src: "./files/{{ item }}"
+#     dest: "/etc/pihole/file-{{ item }}"
+#     mode: 0655
+#     owner: pi
+#     group: pi
+#   with_items:
+#     - whitelist.txt
 
 # - name: Add whitelist
 #   ansible.builtin.shell: "cat /etc/pihole/file-whitelist.txt | xargs pihole whitelist"
