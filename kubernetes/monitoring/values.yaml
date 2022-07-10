@@ -2,22 +2,6 @@ kube-prometheus-stack:
   defaultRules:
     create: false
 
-  prometheus:
-    ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-    labels: {}
-    hosts:
-      - prometheus.hunet.uk
-    paths:
-      - /
-    tls:
-      - secretName: tls-cert-prometheus.hunet.uk
-        hosts:
-          - prometheus.hunet.uk
-
-
   ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   ##
   grafana:
@@ -69,6 +53,24 @@ kube-prometheus-stack:
   ##
   kubeEtcd:
     enabled: false
+
+
+  prometheus:
+    ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    labels: {}
+    hosts:
+      - prometheus.hunet.uk
+    paths:
+      - /
+    tls:
+      - secretName: tls-cert-prometheus.hunet.uk
+        hosts:
+          - prometheus.hunet.uk
+
+    prometheusSpec:
       ## External URL at which Prometheus will be reachable.
       ##
       externalUrl: "https://prometheus.hunet.uk"
