@@ -57,18 +57,18 @@ kube-prometheus-stack:
 
   prometheus:
     ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-    labels: {}
-    hosts:
-      - prometheus.hunet.uk
-    paths:
-      - /
-    tls:
-      - secretName: tls-cert-prometheus.hunet.uk
-        hosts:
-          - prometheus.hunet.uk
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      labels: {}
+      hosts:
+        - prometheus.hunet.uk
+      paths:
+        - /
+      tls:
+        - secretName: tls-cert-prometheus.hunet.uk
+          hosts:
+            - prometheus.hunet.uk
 
     prometheusSpec:
       ## External URL at which Prometheus will be reachable.
