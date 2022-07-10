@@ -14,6 +14,8 @@ spec:
     path: kubernetes/monitoring
     repoURL: https://github.com/ahume/home-infrastructure.git
     targetRevision: HEAD
+    helm:
+      skipCrds: true
   syncPolicy:
     automated:
       prune: true
