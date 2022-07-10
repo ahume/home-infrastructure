@@ -4,7 +4,6 @@ metadata:
   labels:
     app: speedtest-exporter
   name: speedtest-exporter
-  namespace: monitoring
 spec:
   replicas: 1
   selector:

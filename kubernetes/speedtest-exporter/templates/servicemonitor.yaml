@@ -4,7 +4,6 @@ metadata:
   labels:
     app.kubernetes.io/name: speedtest-exporter
   name: speedtest-exporter
-  namespace: monitoring
 spec:
   endpoints:
   - honorLabels: true
