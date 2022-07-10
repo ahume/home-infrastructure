@@ -1,0 +1,5 @@
+---
+- name: Install or upgrade a ad-hoc workers
+  hosts: worker
+  roles:
+    - base
