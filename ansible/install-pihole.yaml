@@ -5,6 +5,17 @@
     - role: base
 
   tasks:
+    # We run node exporter which our in-k8s prometheus can be configured to scrape.
+    # https://github.com/geerlingguy/ansible-role-node_exporter
+    - name: node-exporter
+      ansible.builtin.include_role:
+        name: geerlingguy.node_exporter
+      vars:
+        ansible_become: true
+        node_exporter_arch: 'armv7'
+
+    # Filebeat ships logs to logz.io
+    # https://github.com/ahume/ansible-logz-filebeat
     - name: filebeat
       ansible.builtin.include_role:
         name: logz-filebeat
@@ -23,10 +34,13 @@
         filebeat_extra_linelogs:
           - /var/log/pihole.log
 
+    # ./roles/pihole
     - name: pihole
       ansible.builtin.include_role:
         name: pihole
 
+    # We run unbound, a DNS resolver that pihole forwards to.
+    # https://github.com/roles-ansible/ansible_role_unbound
     - name: unbound
       ansible.builtin.include_role:
         name: do1jlr.unbound

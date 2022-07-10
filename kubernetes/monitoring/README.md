@@ -1,6 +1,6 @@
 # Monitoring
 
-This is just a complete monstrosity of a helm chart. But here's how to upgrade it...
+This is just a complete monstrosity of a helm chart. kube-prometheus-stack.
 
 ## CRDs
 

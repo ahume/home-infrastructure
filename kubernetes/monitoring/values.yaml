@@ -10,30 +10,10 @@ kube-prometheus-stack:
     env:
       GF_INSTALL_PLUGINS: flant-statusmap-panel,ae3e-plotly-panel
 
-    ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
-    ##
-    forceDeployDatasources: false
-
-    ## ForceDeployDashboard Create dashboard configmap even if grafana deployment has been disabled
-    ##
-    forceDeployDashboards: false
-
-    ## Deploy default dashboards
+    ## We don'deploy the default dashboards as there's loads of them, and we aren't going to
+    ## do anything with 99% of them. We create our own custom ones.
     ##
     defaultDashboardsEnabled: false
-
-    ## Timezone for the default dashboards
-    ## Other options are: browser or a specific timezone, i.e. Europe/Luxembourg
-    ##
-    defaultDashboardsTimezone: utc
-
-    # Defined in secret-values.yaml
-    # adminPassword: prom-operator
-
-    rbac:
-      ## If true, Grafana PSPs will be created
-      ##
-      pspEnabled: false
 
     ingress:
       enabled: true
@@ -49,11 +29,10 @@ kube-prometheus-stack:
         - grafana.hunet.uk
 
 
-  ## Component scraping etcd
+  ## Our k3s is doesn't have an etcd to scrape.
   ##
   kubeEtcd:
     enabled: false
-
 
   prometheus:
     ingress:

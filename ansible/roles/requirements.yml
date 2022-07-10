@@ -7,3 +7,5 @@
   version: 2.3.1
 - src: https://github.com/ahume/ansible-logz-filebeat
   name: logz-filebeat
+- src:  buluma.python_pip
+  version: 1.0.7

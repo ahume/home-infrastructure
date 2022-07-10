@@ -51,3 +51,7 @@ Edit the [custom.list](../roles/pihole/templates/custom.list) file.
 | Query logging is enabled in config but nothing is logged to pihole.log | Disable and re-enable query logging in the console of both pihole machines | mark
 
 
+## Useful Ansible commands
+
+Enable query logging
+
