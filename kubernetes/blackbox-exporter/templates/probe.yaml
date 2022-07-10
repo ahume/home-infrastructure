@@ -2,13 +2,12 @@ apiVersion: monitoring.coreos.com/v1
 kind: Probe
 metadata:
   name: test-probe
-  namespace: monitoring
 spec:
   jobName: http-get
   interval: 60s
   module: http_2xx
   prober:
-    url: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc:9115
+    url: blackbox-exporter-prometheus-blackbox-exporter.{{ template "prometheus-blackbox-exporter.namespace" . }}.svc:9115
     scheme: http
     path: /probe
   targets:
