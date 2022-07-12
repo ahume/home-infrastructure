@@ -24,6 +24,13 @@ spec:
           volumeMounts:
             - name: homebridge-data
               mountPath: /homebridge
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "1000m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
 
       # Performance critical workload, prefer SSD.
       # Add this once longhorn installed.
