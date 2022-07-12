@@ -1,7 +1,3 @@
 apiVersion: v2
-name: metallb
+name: homebridge
 version: 1.0.0
-dependencies:
-  - name: homebridge
-    version: 0.0.13
-    repository: https://charts.truecharts.org/
