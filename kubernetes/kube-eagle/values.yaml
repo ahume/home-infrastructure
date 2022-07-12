@@ -1,6 +1,6 @@
 kube-eagle:
   serviceMonitor:
     create: true
-    image:
-      repository: trixdeploy/kube-eagle
-      tag: amd
+  image:
+    repository: trixdeploy/kube-eagle
+    tag: amd
