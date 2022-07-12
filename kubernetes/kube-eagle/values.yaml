@@ -1,0 +1,3 @@
+kube-eagle:
+  serviceMonitor:
+    create: true
