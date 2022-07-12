@@ -3,4 +3,4 @@ kube-eagle:
     create: true
   image:
     repository: trixdeploy/kube-eagle-m
-    tag: arm64-4
+    tag: arm64-5
