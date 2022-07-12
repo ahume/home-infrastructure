@@ -393,7 +393,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": {{ printf "{{instance}}" }},
+              "legendFormat": "{{ printf '{{instance}}' }}",
               "refId": "A"
             }
           ],
@@ -477,7 +477,7 @@ data:
               "expr": "sum(probe_http_duration_seconds) by (instance)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": {{ printf "{{instance}}" }},
+              "legendFormat": "{{ printf '{{instance}}' }}"
               "refId": "A"
             }
           ],
