@@ -15,6 +15,6 @@ spec:
     repoURL: https://github.com/ahume/home-infrastructure.git
     targetRevision: HEAD
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
