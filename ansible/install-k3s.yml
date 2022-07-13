@@ -9,6 +9,10 @@
         name: k3s/download
       vars:
         k3s_version: v1.24.2+k3s1
+    - name: Ensure open-iscsi is installed
+      ansible.builtin.apt:
+        name: open-iscsi
+        state: present
 
 - hosts: k3s_master
   become: true
