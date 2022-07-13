@@ -35,6 +35,7 @@ spec:
       spec:
         accessModes: ["ReadWriteOnce"]
         volumeMode: Filesystem
+        storageClassName: longhorn
         resources:
           requests:
-            storage: 1Gi
+            storage: 200Mi
