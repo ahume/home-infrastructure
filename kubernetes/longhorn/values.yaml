@@ -1,0 +1,18 @@
+ingress:
+  ## Set to true to enable ingress record generation
+  enabled: true
+  host: longhorn.hunet.uk
+
+  ## Set this to true in order to enable TLS on the ingress record
+  ## A side effect of this will be that the backend service will be connected at port 443
+  tls: true
+
+  ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
+  tlsSecret: tls-cert-longhorn.hunet.uk
+
+  ## If ingress is enabled you can set the default ingress path
+  ## then you can access the UI by using the following full path {{host}}+{{path}}
+  path: /
+
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
