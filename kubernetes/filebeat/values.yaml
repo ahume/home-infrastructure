@@ -1,0 +1,3 @@
+logzio-k8s-logs:
+  secrets:
+    create: false # We apply them manually for now.

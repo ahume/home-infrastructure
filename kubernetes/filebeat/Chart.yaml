@@ -1,0 +1,7 @@
+apiVersion: v2
+name: filebeat
+version: 1.0.0
+dependencies:
+  - name: logzio-k8s-logs
+    version: 0.0.5
+    repository: https://logzio.github.io/logzio-helm
