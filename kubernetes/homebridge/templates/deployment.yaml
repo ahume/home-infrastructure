@@ -33,16 +33,15 @@ spec:
               cpu: "1000m"
 
       # Performance critical workload, prefer SSD.
-      # Add this once longhorn installed.
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #       - matchExpressions:
-      #         - key: hunet.uk/disk
-      #           operator: In
-      #           values:
-      #           - ssd
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: hunet.uk/disk
+                operator: In
+                values:
+                - ssd
 
   volumeClaimTemplates:
     - metadata:
