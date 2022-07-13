@@ -17,3 +17,6 @@ longhorn:
 
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
+
+  persistence:
+    defaultDataLocality: best-effort
