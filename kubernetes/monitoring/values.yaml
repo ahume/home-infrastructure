@@ -28,6 +28,14 @@ kube-prometheus-stack:
         hosts:
         - grafana.hunet.uk
 
+    resources:
+      requests:
+        cpu: 0.02
+        memory: 100Mi
+      limits:
+        cpu: 0.02
+        memory: 100Mi
+
 
   ## Our k3s is doesn't have an etcd to scrape.
   ##
