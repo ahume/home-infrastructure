@@ -184,7 +184,7 @@ data:
               "editorMode": "code",
               "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{container=\"$container\"})",
               "hide": false,
-              "legendFormat": "Usage {{ value }} ",
+              "legendFormat": "Usage ",
               "range": true,
               "refId": "C"
             }
