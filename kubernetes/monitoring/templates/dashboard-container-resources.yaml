@@ -313,7 +313,7 @@ data:
               },
               "editorMode": "code",
               "expr": "sum(eagle_pod_container_resource_requests_memory_bytes{container=\"$container\"})",
-              "legendFormat": "Request {{pod}}",
+              "legendFormat": "Request",
               "range": true,
               "refId": "A"
             },
