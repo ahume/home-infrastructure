@@ -30,11 +30,11 @@ kube-prometheus-stack:
 
     resources:
       requests:
-        cpu: 0.1
-        memory: 200Mi
+        cpu: 0.2
+        memory: 500Mi
       limits:
-        cpu: 0.1
-        memory: 200Mi
+        cpu: 0.2
+        memory: 500Mi
 
 
   ## Our k3s is doesn't have an etcd to scrape.
