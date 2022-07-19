@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1658228836010,
+      "iteration": 1658233836538,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -93,7 +93,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{pod=\"$pod\", container=\"$container\"}",
               "format": "table",
               "range": true,
               "refId": "A"
@@ -158,7 +158,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{pod=\"$pod\", container=\"$container\"}",
               "format": "table",
               "range": true,
               "refId": "A"
@@ -223,7 +223,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{pod=\"$pod\", container=\"$container\"}",
               "format": "table",
               "range": true,
               "refId": "A"
@@ -288,7 +288,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{pod=\"$pod\", container=\"$container\"}",
               "format": "table",
               "range": true,
               "refId": "A"
@@ -613,8 +613,8 @@ data:
           {
             "current": {
               "selected": true,
-              "text": "metallb-speaker-5mx7w",
-              "value": "metallb-speaker-5mx7w"
+              "text": "metallb-speaker-lqnfv",
+              "value": "metallb-speaker-lqnfv"
             },
             "datasource": {
               "type": "prometheus",
@@ -674,6 +674,6 @@ data:
       "timezone": "",
       "title": "Container Resources",
       "uid": "cfhHgCenk",
-      "version": 4,
+      "version": 1,
       "weekStart": ""
     }
