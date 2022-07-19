@@ -33,11 +33,270 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 5,
-      "iteration": 1657666208257,
+      "iteration": 1658221469099,
       "links": [],
       "liveNow": false,
       "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 0,
+            "y": 0
+          },
+          "id": 7,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^node$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "format": "table",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Node",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 6,
+            "y": 0
+          },
+          "id": 6,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^namespace$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "format": "table",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Namespace",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 12,
+            "y": 0
+          },
+          "id": 5,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^qos$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "format": "table",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Quality of Service",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 18,
+            "y": 0
+          },
+          "id": 8,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "/^phase$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"}",
+              "format": "table",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Phase",
+          "type": "stat"
+        },
         {
           "datasource": {
             "type": "prometheus",
@@ -134,7 +393,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 0
+            "y": 4
           },
           "id": 2,
           "options": {
@@ -289,7 +548,7 @@ data:
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 0
+            "y": 4
           },
           "id": 3,
           "options": {
@@ -353,9 +612,13 @@ data:
         "list": [
           {
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "homebridge-0",
               "value": "homebridge-0"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
             },
             "definition": "label_values(eagle_pod_container_resource_requests_cpu_cores{}, pod)",
             "hide": 0,
@@ -411,6 +674,6 @@ data:
       "timezone": "",
       "title": "Container Resources",
       "uid": "cfhHgCenk",
-      "version": 4,
+      "version": 3,
       "weekStart": ""
     }
