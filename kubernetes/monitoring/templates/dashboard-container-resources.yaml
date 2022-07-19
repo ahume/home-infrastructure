@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1658221469099,
+      "iteration": 1658228836010,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -416,7 +416,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum(eagle_pod_container_resource_requests_cpu_cores{container=\"$container\"})",
+              "expr": "sum(eagle_pod_container_resource_requests_cpu_cores{pod=\"$pod\", container=\"$container\"})",
               "legendFormat": "Request ",
               "range": true,
               "refId": "A"
@@ -428,7 +428,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(eagle_pod_container_resource_limits_cpu_cores{container=\"$container\"})",
+              "expr": "sum(eagle_pod_container_resource_limits_cpu_cores{pod=\"$pod\", container=\"$container\"})",
               "hide": false,
               "instant": false,
               "legendFormat": "Limit",
@@ -441,7 +441,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{container=\"$container\"})",
+              "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{pod=\"$pod\", container=\"$container\"})",
               "hide": false,
               "legendFormat": "Usage ",
               "range": true,
@@ -571,7 +571,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum(eagle_pod_container_resource_requests_memory_bytes{container=\"$container\"})",
+              "expr": "sum(eagle_pod_container_resource_requests_memory_bytes{pod=\"$pod\", container=\"$container\"})",
               "legendFormat": "Request",
               "range": true,
               "refId": "A"
@@ -582,7 +582,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum(eagle_pod_container_resource_limits_memory_bytes{container=\"$container\"})",
+              "expr": "sum(eagle_pod_container_resource_limits_memory_bytes{pod=\"$pod\", container=\"$container\"})",
               "hide": false,
               "legendFormat": "Limit",
               "range": true,
@@ -594,7 +594,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{container=\"$container\"})",
+              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{pod=\"$pod\", container=\"$container\"})",
               "hide": false,
               "legendFormat": "Usage",
               "range": true,
@@ -612,9 +612,9 @@ data:
         "list": [
           {
             "current": {
-              "selected": false,
-              "text": "homebridge-0",
-              "value": "homebridge-0"
+              "selected": true,
+              "text": "metallb-speaker-5mx7w",
+              "value": "metallb-speaker-5mx7w"
             },
             "datasource": {
               "type": "prometheus",
@@ -640,8 +640,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "homebridge",
-              "value": "homebridge"
+              "text": "speaker",
+              "value": "speaker"
             },
             "datasource": {
               "type": "prometheus",
@@ -667,13 +667,13 @@ data:
         ]
       },
       "time": {
-        "from": "now-1h",
+        "from": "now-5m",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Container Resources",
       "uid": "cfhHgCenk",
-      "version": 3,
+      "version": 4,
       "weekStart": ""
     }
