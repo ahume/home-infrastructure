@@ -2,6 +2,30 @@ kube-prometheus-stack:
   defaultRules:
     create: false
 
+  alertmanager:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      labels: {}
+      hosts:
+        - alertmanager.hunet.uk
+      path: /
+      tls:
+      - secretName: tls-cert-alertmanager.hunet.uk
+        hosts:
+        - alertmanager.hunet.uk
+
+    alertmanagerSpec:
+      resources:
+        requests:
+          cpu: 0.1
+          memory: 200Mi
+        limits:
+          cpu: 0.1
+          memory: 200Mi
+
+
   ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   ##
   grafana:
