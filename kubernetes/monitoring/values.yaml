@@ -97,10 +97,10 @@ kube-prometheus-stack:
 
       resources:
         requests:
-          cpu: 0.2
+          cpu: "0.2"
           memory: 1Gi
         limits:
-          cpu: 0.2
+          cpu: "0.2"
           memory: 1Gi
 
       ## AdditionalScrapeConfigs allows specifying additional Prometheus scrape configurations. Scrape configurations
