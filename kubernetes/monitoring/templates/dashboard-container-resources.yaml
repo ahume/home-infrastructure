@@ -509,7 +509,7 @@ data:
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "Request "
+                  "options": "Request"
                 },
                 "properties": [
                   {
