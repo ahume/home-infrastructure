@@ -29,6 +29,7 @@ traefik:
     effect: "NoSchedule"
   service:
     ipFamilyPolicy: "PreferDualStack"
+
   resources:
     requests:
       cpu: 0.2
@@ -36,3 +37,14 @@ traefik:
     limits:
       cpu: 0.2
       memory: 150Mi
+
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - {{ template "traefik.name" . }}
+          topologyKey: kubernetes.io/hostname
