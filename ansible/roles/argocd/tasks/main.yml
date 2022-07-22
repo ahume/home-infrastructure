@@ -1,0 +1,23 @@
+- name: Add argo-helm chart repo
+  kubernetes.core.helm_repository:
+    name: argo-helm
+    repo_url: https://argoproj.github.io/argo-helm
+
+- name: install argo-cd
+  kubernetes.core.helm:
+    kubeconfig: "/home/pi/.kube/config"
+    name: argo-cd
+    chart_ref: argo-helm/argo-cd
+    release_namespace: argo-cd
+    create_namespace: true
+    values:
+      dex:
+        enabled: false
+      server:
+        extraArgs:
+          - --insecure
+        config:
+          repositories: |
+            - type: helm
+              name: argo-cd
+              url: https://argoproj.github.io/argo-helm

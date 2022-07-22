@@ -1,0 +1,16 @@
+- name: download helm installer
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    dest: /home/pi/get_helm.sh
+    mode: 0755
+
+- name: Execute get_helm.sh
+  become: true
+  ansible.builtin.command: /home/pi/get_helm.sh
+
+- name: install pip and python-yaml
+  include_role:
+    name: buluma.python_pip
+  vars:
+    python_pip_modules:
+      - name: pyyaml

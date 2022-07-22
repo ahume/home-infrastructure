@@ -21,47 +21,8 @@
       vars:
         master_ip: "{{ hostvars[groups['k3s_master'][0]]['ansible_host'] | default(groups['k3s_master'][0]) }}"
         extra_server_args: "--node-label hunet.uk/ethernet-speed={{ ethernet_speed }} --node-label hunet.uk/disk={{ disk }} --disable servicelb --disable traefik --kube-apiserver-arg default-not-ready-toleration-seconds=30 --kube-apiserver-arg default-unreachable-toleration-seconds=30 --kube-controller-arg node-monitor-period=20s --kube-controller-arg node-monitor-grace-period=20s --kubelet-arg node-status-update-frequency=5s"
-  tasks:
-    - name: download helm installer
-      ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-        dest: /home/pi/get_helm.sh
-        mode: 0755
-
-    - name: Execute get_helm.sh
-      become: true
-      ansible.builtin.command: /home/pi/get_helm.sh
-
-    - name: install pip and python-yaml
-      include_role:
-        name: buluma.python_pip
-      vars:
-        python_pip_modules:
-          - name: pyyaml
-
-    - name: Add argo-helm chart repo
-      kubernetes.core.helm_repository:
-        name: argo-helm
-        repo_url: https://argoproj.github.io/argo-helm
-
-    - name: install argo-cd
-      kubernetes.core.helm:
-        kubeconfig: "/home/pi/.kube/config"
-        name: argo-cd
-        chart_ref: argo-helm/argo-cd
-        release_namespace: argo-cd
-        create_namespace: true
-        values:
-          dex:
-            enabled: false
-          server:
-            extraArgs:
-              - --insecure
-            config:
-              repositories: |
-                - type: helm
-                  name: argo-cd
-                  url: https://argoproj.github.io/argo-helm
+    - role: helm
+    - role: argocd
 
 - hosts: k3s_node
   become: true
