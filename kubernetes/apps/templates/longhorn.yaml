@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: longhorn-system
+    namespace: longhorn-system # Can only be installed in longhorn-system namespace.
   project: default
   source:
     path: kubernetes/longhorn
