@@ -41,7 +41,7 @@ kube-prometheus-stack:
 
     persistence:
       type: pvc
-      enabled: false
+      enabled: true
       storageClassName: longhorn
       size: 1Gi
 
