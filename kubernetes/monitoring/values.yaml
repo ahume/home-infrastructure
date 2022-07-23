@@ -39,6 +39,12 @@ kube-prometheus-stack:
     ##
     defaultDashboardsEnabled: false
 
+    persistence:
+      type: pvc
+      enabled: false
+      storageClassName: longhorn
+      size: 1Gi
+
     ingress:
       enabled: true
       annotations:
